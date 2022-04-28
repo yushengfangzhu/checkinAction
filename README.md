@@ -27,7 +27,7 @@
 | `Xiaomi_Bs`             |   小米运动步数   |默认为1w-2w之间随机 或自定义随机范围`[18000-25000]`|
 | `Cloud_USER`            |   天翼云盘账号   |天翼云盘手机号,多账号请用#分割 例如：13800000000#13800000001|
 | `Cloud_PWD`             |   天翼云盘密码   |天翼云盘密码,多账号请用#分割 例如：cxkjntm#jntmcxk|
-| `BILI_COOKIE`           |   哔哩哔哩COOKIE | B站网页端 浏览器F12 点击NetWork 刷新网页,随便找一个请求,即可看到cookie ![image](https://user-  images.githubusercontent.com/17971243/165732109-92c08e38-cecb-4d0a-a653-43924d4ced18.png)
+| `BILI_COOKIE`           |   哔哩哔哩COOKIE | B站网页端 浏览器F12 点击NetWork 刷新网页,随便找一个请求,即可看到cookie![image](https://user-images.githubusercontent.com/17971243/165732364-52392a29-d132-43f2-bddd-ed0e38d8e2f1.png)
 
 
 | `BILI_COIN`             |   哔哩哔哩每日是否投币|默认不添加参数即投币,改为0则不再投币
