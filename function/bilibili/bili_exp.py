@@ -1,8 +1,16 @@
-
 import json
+import os
+
 import requests
 import time
 import random
+import sys
+
+sys.path.append("My-Actions/function/bilibili/")
+
+SEND_KEY = os.environ['SEND_KEY']
+BILI_COOKIE = os.environ['BILI_COOKIE'].replace(" ", "")
+BILI_COIN = os.environ['BILI_COIN'].replace(" ", "")
 
 
 class bili_exp:
@@ -54,7 +62,7 @@ class bili_exp:
 
     def getvideo(self):
         uids = ['473837611', '20165629', '9657370']
-        # 分别是 新华社，共青团中央，我的UID(水经验..介意可以删掉)，可在关注的up空间右下角找到，替换或添加到列表即可
+        # 分别是 新华社，共青团中央，我的UID(账号:余生放逐 水经验,emm,介意可以删掉)，可在关注的up空间右下角找到，替换或添加到列表即可
         url = f'https://api.bilibili.com/x/space/arc/search?mid={random.choice(uids)}'
         res = self.s.get(url, headers=self.headers).json()['data']['list']['vlist']
         return res
@@ -148,11 +156,14 @@ class bili_exp:
 
 
 def main():
-    cookie = ""  # 浏览器开发者工具复制cookie,支持多账号，cookie之间用&连接
+    cookie = os.environ['BILI_COOKIE']  # 腾讯云函数 阿里云函数的话 把这里改为cookie值即可部署
     for c in cookie.split('&'):
-        b = bili_exp(c)  # 不投币取消本行注释，并注释下一行
-        # b = bili_exp(c, 1)  # 投币需注释上一行，并取消本行注释
-        b.start()
+        if BILI_COIN == "1":
+            b = bili_exp(c, 1)  # 投币需注释上一行，并取消本行注释
+            b.start()
+        else:
+            b = bili_exp(c)
+            b.start()
 
 
 def main_handler(*args):  # 腾讯云函数
@@ -164,4 +175,8 @@ def handler(*args):  # 阿里云函数
 
 
 if __name__ == '__main__':
-    main()
+
+    if os.environ['BILI_COOKIE'] == "":  # 复制cookie,支持多账号，cookie之间用&连接
+        print("未填写哔哩哔哩COOKIE取消运行")
+        exit(0)
+main()
