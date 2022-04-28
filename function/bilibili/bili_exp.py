@@ -5,12 +5,14 @@ import requests
 import time
 import random
 import sys
-
+from sendNotify import *
+sendNotify = sendNotify()
 sys.path.append("My-Actions/function/bilibili/")
 
 SEND_KEY = os.environ['SEND_KEY']
 BILI_COOKIE = os.environ['BILI_COOKIE'].replace(" ", "")
 BILI_COIN = os.environ['BILI_COIN'].replace(" ", "")
+BILI_FOCUS = os.environ['BILI_FOCUS'].replace(" ", "")
 
 
 class bili_exp:
@@ -61,8 +63,11 @@ class bili_exp:
         return current_exp, msg
 
     def getvideo(self):
-        uids = ['473837611', '20165629', '9657370']
-        # 分别是 新华社，共青团中央，我的UID(账号:余生放逐 水经验,emm,介意可以删掉)，可在关注的up空间右下角找到，替换或添加到列表即可
+        uids = ['473837611',  '5623800','9657370']
+
+        for c in BILI_FOCUS.split(';'):
+            uids.append(c);
+        # 分别是 新华社，BlueSkyClouds(这个项目之前的作者B站id 代码被github删了,不知为何我的被保留了 )，我的UID(账号:余生放逐 水经验,emm,介意可以删掉)，可在关注的up空间右下角找到，替换或添加到列表即可
         url = f'https://api.bilibili.com/x/space/arc/search?mid={random.choice(uids)}'
         res = self.s.get(url, headers=self.headers).json()['data']['list']['vlist']
         return res
@@ -147,22 +152,26 @@ class bili_exp:
                         j += 1
 
     def start(self):
+        msg_list = []
         exp1, msg = self.getInfo()
         print(msg)
         print(f'{username}：')
         self.task()
         exp2, a = self.getInfo()
-        print('-' * 30 + f'\n任务完成，获得经验{int(exp2) - int(exp1)}\n' + '-' * 30 + '\n')
-
+        msg_list.append(msg,)
+        msg_list.append(f'{username}：')
+        msg_list.append('-' * 30 + f'\n任务完成，获得经验{int(exp2) - int(exp1)}\n' + '-' * 30 + '\n')
+        sendNotify.send(msg_list)
 
 def main():
     cookie = os.environ['BILI_COOKIE']  # 腾讯云函数 阿里云函数的话 把这里改为cookie值即可部署
     for c in cookie.split('&'):
-        if BILI_COIN == "1":
-            b = bili_exp(c, 1)  # 投币需注释上一行，并取消本行注释
-            b.start()
-        else:
+        if BILI_COIN == "0":
             b = bili_exp(c)
+            b.start()
+
+        else:
+            b = bili_exp(c, 1)  # 投币需注释上一行，并取消本行注释
             b.start()
 
 
