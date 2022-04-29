@@ -27,7 +27,7 @@
 | `Xiaomi_Bs`             |   小米运动步数   |默认为1w-2w之间随机 或自定义随机范围`[18000-25000]`|
 | `Cloud_USER`            |   天翼云盘账号   |天翼云盘手机号,多账号请用#分割 例如：13800000000#13800000001|
 | `Cloud_PWD`             |   天翼云盘密码   |天翼云盘密码,多账号请用#分割 例如：cxkjntm#jntmcxk|
-| `BILI_COOKIE`           |   哔哩哔哩COOKIE | B站网页端 浏览器F12 点击NetWork 刷新网页,随便找一个请求,即可看到cookie
+| `BILI_COOKIE`           |   哔哩哔哩COOKIE | B站网页端 浏览器F12 点击NetWork 刷新网页,随便找一个请求,即可看到cookie.IOS使用stream抓包
 | `BILI_COIN`             |   哔哩哔哩每日是否投币|默认不添加参数即投币,改为0则不再投币
 | `BILI_FOCUS`            |   哔哩哔哩每日投币的目标账户UID | ;分隔  (英文分号) 代码自带三个分别是 新华社，BlueSkyClouds(这个项目之前的作者B站id 代码被github删了,我下过代码,做了点修改)，我的UID(账号:余生放逐 水经验,emm,介意可以删掉bili_exp.py 66行)  获取方式网页端即up主主页链接的九位数字,手机端为up主主页关注按钮下方 详情 展开 显示的很小的一串 uid数字
 | `V_REF_URL`             |   腾讯视频Request URL |电脑端搜索auth_refresh复制整段Request url[图片教程](https://cdn.jsdelivr.net/gh/BlueskyClouds/Script/img/2020/11/1/img/v_1.jpg)|
