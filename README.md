@@ -1,5 +1,6 @@
 个人收集并适配Github Actions的各类签到大杂烩
 做了个简易的图文教程  
+2022.04.29 17:00更新,企业微信robot的代码更新了,发现之前的robot代码失效了,重新添加了,测试百度贴吧推送正常
 
 【腾讯文档】爱奇艺
 https://docs.qq.com/doc/DU012TGRuWXBoSElV
