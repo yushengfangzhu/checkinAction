@@ -21,7 +21,7 @@
 | 名称     | 内容           |   说明  |
 | -------- | -------------|   ----- |
 | `PAT`                   |   使用Github Actions同步和拉取代码    |利用Github Actions自动同步上游仓库[PAT获取教程](RepoSync.md)|
-| `IQIYI_COOKIE`          |   爱奇艺P00001    |P00001的值 详情[文字教程](https://www.bilibili.com/read/cv7437179) [视频教程](https://www.bilibili.com/video/BV1B541157DE) 电脑版有效期三个月|    (爱奇艺目前已失效,等过两天有时间了来更新, )
+| `IQIYI_COOKIE`          |   爱奇艺cookie   |cookie 的值  网页端登录后 F12 切到Network  tab下,刷新 找个链接即可看到,IOS 使用stream抓包,Android抓包这个不太关注..可以自行百度下怎么抓包(就是懒得更新了....) 
 | `Xiaomi_User`           |   小米运动账号   |小米运动账号,多账号请用#分割 例如：13800138000#13800138001|
 | `Xiaomi_Pw`             |   小米运动密码   |小米运动密码,多账号请用#分割 例如：abc123qwe#abcqwe2|
 | `Xiaomi_Bs`             |   小米运动步数   |默认为1w-2w之间随机 或自定义随机范围`[18000-25000]`|
