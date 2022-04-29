@@ -27,7 +27,7 @@ jobs:
             - name: "运行 爱奇艺会员签到"
               run: python3 function/iqy/local_action.py  
               env:
-                  iQIYI_COOKIE: ${{ secrets.iQIYI_COOKIE }}
+                  IQIYI_COOKIE: ${{ secrets.IQIYI_COOKIE }}
                   SEND_KEY: ${{ secrets.SEND_KEY }}
                   PUSH_KEY: ${{ secrets.PUSH_KEY }}
                   BARK_PUSH: ${{ secrets.BARK_PUSH }}
