@@ -40,13 +40,13 @@ class sendNotify:
     # =======================================企业微信机器人通知设置区域=========================================== 此处填你企业微信机器人的
     # webhook(详见文档 https://work.weixin.qq.com/api/doc/90000/90136/91770)，例如：693a91f6-7xxx-4bc4-97a0-0ec2sifa5aaa
     # 注：此处设置github action用户填写到Settings-Secrets里面(Name输入QYWX_KEY)
-    # QYWX_KEY = ''
+    QYWX_KEY = ''
 
     # =======================================企业微信应用消息通知设置区域=========================================== 此处填你企业微信应用消息的
     # 第一个值是企业id，第二个值是secret，第三个值@all(或者成员id)，第四个值是AgentID 中间以逗号隔开
     # 详情查看https://note.youdao.com/ynoteshare1/index.html?id=351e08a72378206f9dd64d2281e9b83b&type=note#/
     # B-791548lnzXBE6_BWfxdf3kSTMJr9vFEPKAbh6WERQ,mingcheng,1000001,2COXgjH2UIfERF2zxrtUOKgQ9XklUqMdGSWLBoW_lSDAdafat
-    QYWX_AM = ''
+    # QYWX_AM = ''
 
     # =======================================QQ酷推通知设置区域===========================================
     # 此处填你申请的SKEY(具体详见文档 https://cp.xuthus.cc/)
@@ -96,8 +96,8 @@ class sendNotify:
     #     QQ_MODE = os.environ['QQ_MODE']
 
     # 企业微信
-    # if os.environ['QYWX_KEY'] != "":
-    #     QQ_SKEY = os.environ['QYWX_KEY']
+    if os.environ['QYWX_KEY'] != "":
+        QYWX_KEY = os.environ['QYWX_KEY']
     if os.environ['QYWX_AM'] != "":
         QYWX_AM = os.environ['QYWX_AM']
 
@@ -220,6 +220,31 @@ class sendNotify:
     #     else:
     #         print('\n您未提供酷推的SKEY，取消QQ推送消息通知\n')
     #         pass
+
+    def wxRobotpush(self, text, desp):
+        if sendNotify.QYWX_KEY != '':
+            url = "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=" + sendNotify.QYWX_KEY
+            params = {
+                "msgtype": "text",
+                "text": {
+                    "content": text + "--------------" + desp
+                }
+            }
+            headers = {'content-type': 'application/json;charset=utf8'}
+            response = json.dumps(requests.post(url=url, params=params, headers=headers).json(), ensure_ascii=False)
+            datas = json.loads(response)
+
+            if datas['code'] == 200:
+                print('\n推送发送通知消息成功\n')
+            elif datas['code'] == 500:
+                print('\n推送QYWX_KEY错误\n')
+            else:
+                print('\n发送通知调用API失败！！\n')
+
+        else:
+            print('\n您未提供酷推的SKEY，取消QQ推送消息通知\n')
+            pass
+
     def pushNotify(self, text, desp):
         if sendNotify.PUSH_PLUS_TOKEN != '':
             url = 'http://www.pushplus.plus/send'
@@ -255,14 +280,15 @@ class sendNotify:
         if sendNotify.QYWX_AM != '':
             # 获得access_token
             url = 'https://qyapi.weixin.qq.com/cgi-bin/gettoken'
-            token_param = '?corpid=' + sendNotify.QYWX_AM.split(',')[0] + '&corpsecret=' + sendNotify.QYWX_AM.split(',')[1]
+            token_param = '?corpid=' + sendNotify.QYWX_AM.split(',')[0] + '&corpsecret=' + \
+                          sendNotify.QYWX_AM.split(',')[1]
             token_data = requests.get(url + token_param)
             token_data.encoding = 'utf-8'
             token_data = token_data.json()
             access_token = token_data['access_token']
-            #发送内容
+            # 发送内容
             content = desp
-            #创建要发送的消息
+            # 创建要发送的消息
             data = {
                 "touser": sendNotify.QYWX_AM.split(',')[2],
                 "msgtype": "text",
@@ -287,6 +313,7 @@ class sendNotify:
         send.tgBotNotify(title, msg)
         send.dingNotify(title, msg)
         send.pushNotify(title, msg)
+        send.wxRobotpush(title,msg)
         send.sendWechat(msg)
         # send.coolpush(title,msg)
 
