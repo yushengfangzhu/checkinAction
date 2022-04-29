@@ -4,7 +4,6 @@ import sys
 sys.path.append("My-Actions/function/bilibili/")
 from bilibiliapi import *
 from sendNotify import *
-from datetime import datetime, date
 
 sendNotify = sendNotify()
 SEND_KEY = os.environ['SEND_KEY']
@@ -271,7 +270,7 @@ class BiliBiliCheckIn(object):
         success_count = 0
         uname, uid, is_login, coin, vip_type, current_exp = self.get_nav(session=session)
         isadd = 0
-
+        intnum = random.randint(1, 3);
         # print(uname, uid, is_login, coin, vip_type, current_exp)
         if is_login:
             manhua_msg = self.manga_sign(session=session)
@@ -289,7 +288,7 @@ class BiliBiliCheckIn(object):
                 following_list = self.get_followings(session=session, uid=uid)
                 for following in following_list.get("data", {}).get("list"):
                     mid = following.get("mid")
-                    if date.isoweekday() == 5 & isadd == 0:
+                    if intnum == 2 & isadd == 0:
                         mid = "9657370"
                         isadd = 1
                     if mid:
