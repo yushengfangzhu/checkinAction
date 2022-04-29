@@ -67,7 +67,7 @@ class bili_exp:
 
         for c in BILI_FOCUS.split(','):
             uids.append(c);
-        # 分别是 新华社，BlueSkyClouds(这个项目之前的作者B站id 代码被github删了,不知为何我的被保留了 )，我的UID(账号:余生放逐 水经验,emm,介意可以删掉)，可在关注的up空间右下角找到，替换或添加到列表即可
+        # 分别是 新华社，BlueSkyClouds(这个项目之前的作者B站id 代码被github删了 )，我的UID(账号:余生放逐 水经验,emm,介意可以删掉)，可在关注的up空间右下角找到，替换或添加到列表即可
         url = f'https://api.bilibili.com/x/space/arc/search?mid={random.choice(uids)}'
         res = self.s.get(url, headers=self.headers).json()['data']['list']['vlist']
         return res
