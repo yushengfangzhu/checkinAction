@@ -63,7 +63,7 @@ class bili_exp:
         return current_exp, msg
 
     def getvideo(self):
-        uids = ['473837611',  '5623800','9657370']
+        uids = ['473837611',  '5623800', '9657370']
 
         for c in BILI_FOCUS.split(';'):
             uids.append(c);
