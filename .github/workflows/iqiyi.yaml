@@ -1,9 +1,10 @@
 name: 爱奇艺会员签到
 
+
 on:
     workflow_dispatch:
     schedule:
-        - cron: "*/20 16 * * *"
+        - cron: "5 16 * * *"
     watch:
         types: [started]
 
@@ -12,17 +13,19 @@ jobs:
         runs-on: ubuntu-latest
         if: github.event.repository.owner.id == github.event.sender.id
         steps:
-            - uses: actions/checkout@v1
-            - name: Use Node.js 10.x
-              uses: actions/setup-node@v1
+            - name: Checkout
+              uses: actions/checkout@v2
+
+            - name: "初始化Python"
+              uses: actions/setup-python@v1
               with:
-                  node-version: 10.x
-            - name: npm install
-              run: |
-                  npm install
-            - name: "运行【爱奇艺会员签到】"
-              run: |
-                  node function/iQIYI-DailyBonus/iqiyi.js
+                python-version: 3.8
+
+            - name: "安装依赖包"
+              run: pip install -r ./requirements.txt
+
+            - name: "运行 爱奇艺会员签到"
+              run: python3 function/iqy/local_action.py  
               env:
                   iQIYI_COOKIE: ${{ secrets.iQIYI_COOKIE }}
                   SEND_KEY: ${{ secrets.SEND_KEY }}
