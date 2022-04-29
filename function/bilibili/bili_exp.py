@@ -65,9 +65,14 @@ class bili_exp:
     def getvideo(self):
         uids = ['473837611',  '5623800', '9657370']
 
-        for c in BILI_FOCUS.split(','):
-            uids.append(c)
-        # 分别是 新华社，BlueSkyClouds(这个项目之前的作者B站id 代码被github删了,不知为何我的被保留了 )，我的UID(账号:余生放逐 水经验,emm,介意可以删掉)，可在关注的up空间右下角找到，替换或添加到列表即可
+        if(BILI_FOCUS!="" ):
+            if(BILI_FOCUS.__contains__(",")):
+                for c in BILI_FOCUS.split(','):
+                    uids.append(c)
+            else:
+                uids.append(BILI_FOCUS)
+
+        # 分别是 新华社，BlueSkyClouds(这个项目之前的作者B站id 代码被github删了)，我的UID(账号:余生放逐 水经验,emm,介意可以删掉)，可在关注的up空间右下角找到，替换或添加到列表即可
         url = f'https://api.bilibili.com/x/space/arc/search?mid={random.choice(uids)}'
         res = self.s.get(url, headers=self.headers).json()['data']['list']['vlist']
         return res
@@ -187,5 +192,6 @@ if __name__ == '__main__':
 
     if os.environ['BILI_COOKIE'] == "":  # 复制cookie,支持多账号，cookie之间用&连接
         print("未填写哔哩哔哩COOKIE取消运行")
+        sendNotify.send("未填写哔哩哔哩COOKIE取消运行")
         exit(0)
-main()
+    main()
