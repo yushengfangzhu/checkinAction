@@ -3,7 +3,7 @@
 2022.04.29 17:00更新,企业微信robot的代码更新了,发现之前的robot代码失效了,重新添加了,测试百度贴吧推送正常
 # 【腾讯文档-action添加使用说明】https://docs.qq.com/doc/DU012TGRuWXBoSElV
 
-# 使用方式 1
+使用方式 1
 1. [新建仓库并同步代码](RepoSync.md)
 2. 点击Settings -> Secrets -> 点击绿色按钮 (如无绿色按钮说明已激活。直接到下一步。 )
 3. 新增 new secret 并设置 Secrets:
@@ -12,7 +12,7 @@
 7. 由于规则更新,同步后会默认禁用,请手动点击Actions 选择要签到的项目 `enable workflows`激活
 8. [定时执行](#定时执行)  (如修改了执行时间 请关闭同步源仓库  否则同步时会覆盖)
 
-# 定时执行
+定时执行
 1. 支持手动执行，具体在Actions中选中要执行的Workflows后再在右侧可以看到Run workflow，点击即可运行此workflow。  1
 
 2. 如果嫌上一步麻烦的，也可以直接点击一下自己的star，你会发现所有的workflow都已执行。
