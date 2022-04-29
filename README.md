@@ -21,16 +21,15 @@
 | 名称     | 内容           |   说明  |
 | -------- | -------------|   ----- |
 | `PAT`                   |   使用Github Actions同步和拉取代码    |利用Github Actions自动同步上游仓库[PAT获取教程](RepoSync.md)|
-| `IQIYI_COOKIE`          |   爱奇艺P00001    |P00001的值 详情[文字教程](https://www.bilibili.com/read/cv7437179) [视频教程](https://www.bilibili.com/video/BV1B541157DE) 电脑版有效期三个月|    (爱奇艺目前已失效,等后期更新 )
+| `IQIYI_COOKIE`          |   爱奇艺P00001    |P00001的值 详情[文字教程](https://www.bilibili.com/read/cv7437179) [视频教程](https://www.bilibili.com/video/BV1B541157DE) 电脑版有效期三个月|    (爱奇艺目前已失效,等过两天有时间了来更新, )
 | `Xiaomi_User`           |   小米运动账号   |小米运动账号,多账号请用#分割 例如：13800138000#13800138001|
 | `Xiaomi_Pw`             |   小米运动密码   |小米运动密码,多账号请用#分割 例如：abc123qwe#abcqwe2|
 | `Xiaomi_Bs`             |   小米运动步数   |默认为1w-2w之间随机 或自定义随机范围`[18000-25000]`|
 | `Cloud_USER`            |   天翼云盘账号   |天翼云盘手机号,多账号请用#分割 例如：13800000000#13800000001|
 | `Cloud_PWD`             |   天翼云盘密码   |天翼云盘密码,多账号请用#分割 例如：cxkjntm#jntmcxk|
-| `BILI_COOKIE`           |   哔哩哔哩COOKIE
-| `BILI_COIN`             |   哔哩哔哩每日是否投币,默认不添加参数即投币,改为0则不再投币
-| `BILI_FOCUS`            |   哔哩哔哩每日投币的目标账户UID  ;分隔  (英文分号) 分别是 新华社，BlueSkyClouds(这个项目之前的作者B站id 代码被github删了,不知为何我的被保留了 )，我的UID(账号:余生放逐 水经验,emm,介意可以删掉)  获取方式网页端即up主主页链接的九位数字,手机端为up主主页关注按钮下方 详情 展开 显示的很小的一串 uid数字
-
+| `BILI_COOKIE`           |   哔哩哔哩COOKIE | B站网页端 浏览器F12 点击NetWork 刷新网页,随便找一个请求,即可看到cookie
+| `BILI_COIN`             |   哔哩哔哩每日是否投币|默认不添加参数即投币,改为0则不再投币
+| `BILI_FOCUS`            |   哔哩哔哩每日投币的目标账户UID | ;分隔  (英文分号) 代码自带三个分别是 新华社，BlueSkyClouds(这个项目之前的作者B站id 代码被github删了,我下过代码,做了点修改)，我的UID(账号:余生放逐 水经验,emm,介意可以删掉bili_exp.py 66行)  获取方式网页端即up主主页链接的九位数字,手机端为up主主页关注按钮下方 详情 展开 显示的很小的一串 uid数字
 | `V_REF_URL`             |   腾讯视频Request URL |电脑端搜索auth_refresh复制整段Request url[图片教程](https://cdn.jsdelivr.net/gh/BlueskyClouds/Script/img/2020/11/1/img/v_1.jpg)|
 | `V_COOKIE`              |   腾讯视频Cookie   |电脑端搜索auth_refresh复制Cookie[图片教程](https://cdn.jsdelivr.net/gh/BlueskyClouds/Script/img/2020/11/1/img/v_2.jpg)|
 | `TELECOM_MOBILE`        |   中国电信手机号         |只需要手机号 单账号 `多账号将会暴露手机号` 自行考虑,多账号使用`,`分割 部分地区或手机号暂无法签到，自行测试使用|
