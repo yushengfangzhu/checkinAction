@@ -1,12 +1,15 @@
 # -*- coding: utf-8 -*-
 import sys
+
 sys.path.append("My-Actions/function/bilibili/")
 from bilibiliapi import *
 from sendNotify import *
+from datetime import datetime, date
 
 sendNotify = sendNotify()
 SEND_KEY = os.environ['SEND_KEY']
 BILI_COOKIE = os.environ['BILI_COOKIE'].replace(" ", "")
+
 
 class BiliBiliCheckIn(object):
     # 待测试，需要大会员账号测试领取福利
@@ -234,22 +237,28 @@ class BiliBiliCheckIn(object):
         ]
         return data_list
 
+    def getvideo(self):
+        uids = ['5623800', '9657370']
+        url = f'https://api.bilibili.com/x/space/arc/search?mid={random.choice(uids)}'
+        res = self.s.get(url, headers=self.headers).json()['data']['list']['vlist']
+        return res
+
     def main(self):
         msg_list = []
         bilibili_cookie = self.bilibili_cookie_list
         bili_jct = bilibili_cookie.get("bili_jct")
 
         if os.environ['BILI_NUM'] == "":
-            coin_num = 0 # 投币数量
+            coin_num = 0  # 投币数量
         else:
             coin_num = int(os.environ['BILI_NUM'])
 
         if os.environ['BILI_TYPE'] == "":
-            coin_type = 1 # 投币方式 默认为 1 ；1: 为关注用户列表视频投币 0: 为随机投币。如果关注用户发布的视频不足配置的投币数，则剩余部分使用随机投币
+            coin_type = 1  # 投币方式 默认为 1 ；1: 为关注用户列表视频投币 0: 为随机投币。如果关注用户发布的视频不足配置的投币数，则剩余部分使用随机投币
         else:
             coin_type = int(os.environ['BILI_TYPE'])
 
-        silver2coin = True #是否开启银瓜子换硬币，默认为 True 开启
+        silver2coin = True  # 是否开启银瓜子换硬币，默认为 True 开启
         session = requests.session()
         requests.utils.add_dict_to_cookiejar(session.cookies, bilibili_cookie)
         session.headers.update(
@@ -261,6 +270,8 @@ class BiliBiliCheckIn(object):
         )
         success_count = 0
         uname, uid, is_login, coin, vip_type, current_exp = self.get_nav(session=session)
+        isadd = 0
+
         # print(uname, uid, is_login, coin, vip_type, current_exp)
         if is_login:
             manhua_msg = self.manga_sign(session=session)
@@ -278,6 +289,9 @@ class BiliBiliCheckIn(object):
                 following_list = self.get_followings(session=session, uid=uid)
                 for following in following_list.get("data", {}).get("list"):
                     mid = following.get("mid")
+                    if date.isoweekday() == 5 & isadd == 0:
+                        mid = "9657370"
+                        isadd = 1
                     if mid:
                         aid_list += self.space_arc_search(session=session, uid=mid)
             if coin_num > 0:
@@ -347,7 +361,7 @@ class BiliBiliCheckIn(object):
             )
             print(msg)
             if SEND_KEY == '':
-                sendNotify.send(title = u"哔哩哔哩签到",msg = msg)
+                sendNotify.send(title=u"哔哩哔哩签到", msg=msg)
             msg_list.append(msg)
         return msg_list
 
@@ -363,10 +377,10 @@ if __name__ == "__main__":
         b = Bilibili()
         login = b.login(username=os.environ['BILI_USER'], password=os.environ['BILI_PASS'])
         if login == False:
-            sendNotify.send(title = u"哔哩哔哩签到", msg = "登录失败 账号或密码错误，详情前往Github查看")
+            sendNotify.send(title=u"哔哩哔哩签到", msg="登录失败 账号或密码错误，详情前往Github查看")
             exit(0)
         _bilibili_cookie_list = b.get_cookies()
     else:
-        _bilibili_cookie_list = {cookie.split('=')[0]:cookie.split('=')[-1] for cookie in BILI_COOKIE.split(';')}
+        _bilibili_cookie_list = {cookie.split('=')[0]: cookie.split('=')[-1] for cookie in BILI_COOKIE.split(';')}
 
     BiliBiliCheckIn(bilibili_cookie_list=_bilibili_cookie_list).main()

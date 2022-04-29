@@ -24,9 +24,13 @@ jobs:
               run: pip install -r ./requirements.txt
 
             - name: "运行 哔哩哔哩签到"
-              run: python3 function/bilibili/bili_exp.py
+              run: python3 function/bilibili/bilibili.py
               env:
+                  BILI_USER: ${{ secrets.BILI_USER }}
+                  BILI_PASS: ${{ secrets.BILI_PASS }}
                   BILI_COOKIE: ${{ secrets.BILI_COOKIE }}
+                  BILI_NUM: ${{ secrets.BILI_NUM }}
+                  BILI_TYPE: ${{ secrets.BILI_TYPE }}
                   BILI_COIN: ${{ secrets.BILI_COIN }}
                   BILI_FOCUS: ${{ secrets.BILI_FOCUS }}
                   SEND_KEY: ${{ secrets.SEND_KEY }}
