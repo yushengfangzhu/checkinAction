@@ -17,11 +17,11 @@ import time
 import hashlib
 import string
 from json import dumps
-IQY_COOKIE = os.environ['IQY_COOKIE']
+IQIYI_COOKIE = os.environ['IQIYI_COOKIE']
 sendNotify = sendNotify()
 SEND_KEY = os.environ['SEND_KEY']
 infos = {
-    "cookie": IQY_COOKIE,
+    "cookie": IQIYI_COOKIE,
 }
 
 
