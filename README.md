@@ -1,4 +1,9 @@
 个人收集并适配Github Actions的各类签到大杂烩
+做了个简易的图文教程  
+
+【腾讯文档】爱奇艺
+https://docs.qq.com/doc/DU012TGRuWXBoSElV
+
 ## 不要fork了 ⭐️star就行    1
 # 使用方式 1
 1. [新建仓库并同步代码](RepoSync.md)
@@ -28,12 +33,11 @@
 | `Cloud_USER`            |   天翼云盘账号   |天翼云盘手机号,多账号请用#分割 例如：13800000000#13800000001|
 | `Cloud_PWD`             |   天翼云盘密码   |天翼云盘密码,多账号请用#分割 例如：cxkjntm#jntmcxk|
 | `BILI_COOKIE`           |   哔哩哔哩COOKIE | B站网页端 浏览器F12 点击NetWork 刷新网页,随便找一个请求,即可看到cookie.IOS使用stream抓包
-| `BILI_COIN`             |   哔哩哔哩每日是否投币|默认不添加参数即投币,改为0则不再投币
 | `BILI_FOCUS`            |   哔哩哔哩每日投币的目标账户UID | ;分隔  (英文分号) 代码自带三个分别是 新华社，BlueSkyClouds(这个项目之前的作者B站id 代码被github删了,我下过代码,做了点修改)，我的UID(账号:余生放逐 水经验,emm,介意可以删掉bili_exp.py 66行)  获取方式网页端即up主主页链接的九位数字,手机端为up主主页关注按钮下方 详情 展开 显示的很小的一串 uid数字
 | `V_REF_URL`             |   腾讯视频Request URL |电脑端搜索auth_refresh复制整段Request url[图片教程](https://cdn.jsdelivr.net/gh/BlueskyClouds/Script/img/2020/11/1/img/v_1.jpg)|
 | `V_COOKIE`              |   腾讯视频Cookie   |电脑端搜索auth_refresh复制Cookie[图片教程](https://cdn.jsdelivr.net/gh/BlueskyClouds/Script/img/2020/11/1/img/v_2.jpg)|
 | `TELECOM_MOBILE`        |   中国电信手机号         |只需要手机号 单账号 `多账号将会暴露手机号` 自行考虑,多账号使用`,`分割 部分地区或手机号暂无法签到，自行测试使用|
-| `BDUSS`                 |   百度BDUSS         |BDUSS值切勿使用双击复制 (结尾可能会有一个`符号`双击复制可能无法复制完整)|
+| `BDUSS`                 |   百度BDUSS         | 贴吧自动签到,获取方式参考百度经验https://jingyan.baidu.com/article/95c9d20d073afbec4e7561d4.html|
 ##### 推送通知环境变量(目前提供`微信server酱`、`pushplus(推送加)`、`iOS Bark APP`、`telegram机器人`、`钉钉机器人`、`企业微信机器人`、`iGot`等通知方式)
 
 | Name                    |   归属   | 属性   | 说明                                                         |
